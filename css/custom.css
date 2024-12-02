@@ -1,0 +1,27 @@
+:root {
+    --background-color-white: #fff;
+    --background-color-opacity: 1;
+    --gap-row: 1rem;
+    --text-opacity: 1;
+    --text-color: #000;
+}
+
+.scrollable {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.gap-y {
+    row-gap: var(--gap-row);
+}
+
+
+.text-\[\#000000\] {
+    opacity: var(--text-opacity);
+    color: var(--text-color);
+}
+
+.bg-\[\#ffffff\] {
+    opacity: var(--background-color-opacity);
+    background-color: var(--background-color-white);
+}

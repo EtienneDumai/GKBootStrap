@@ -1,0 +1,142 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% if description is defined %} {{description}} {% else %} {{constant('WEBSITE_DESCRIPTION')}} {% endif %}">
+    <title>{{constant('WEBSITE_TITLE')}} {{ title }}</title>
+    <script src="../js/aside.js"></script>
+    <link rel="icon" type="image/x-icon" href="../asset/logo.ico">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+</head>
+<body class="min-vh-100 d-flex flex-column">
+    <main class="flex-grow-1">
+        <!-- Header -->
+        <header class="d-flex justify-content-between align-items-center py-3 px-4 bg-danger text-white">
+            <!-- logo -->
+            <a href="index.php?controlleur=index&methode=lister" aria-label="logo">
+                <svg width="195" height="52" viewbox="0 0 195 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- SVG content -->
+                </svg>
+            </a>
+
+            <!-- Burger Menu -->
+            <div class="d-md-none">
+                <button id="burger-menu" class="btn text-white" aria-label="menuBurger">
+                    <i class="bi bi-list"></i>
+                </button>
+            </div>
+
+            <!-- navbar -->
+            <nav id="menu" class="d-none d-md-block">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="index.php?controlleur=index&methode=lister" aria-label="ACCUEIL">ACCUEIL</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white border-start border-end border-white px-3" href="index.php?controlleur=categorie&methode=lister" aria-label="CATEGORIE">CATEGORIE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="index.php?controlleur=propEv&methode=lister" aria-label="PROPOSITION EVENNEMENT">PROPOSITION D'EVENEMENT</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- compte btn -->
+            <a href="index.php?controlleur=connexion&methode=lister" class="d-none d-md-flex btn btn-outline-light" aria-label="Compte">Compte</a>
+        </header>
+
+        <!-- Content -->
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Aside -->
+                <aside class="col-md-3 d-none d-sm-block bg-danger text-white p-3">
+                    <h1 class="text-center">ACTUS</h1>
+                    {% for actualite in actualites %}
+                    <div class="bg-white text-black p-2 rounded shadow-sm mb-3">
+                        <h2 class="text-center">{{ actualite.titre }}</h2>
+                        <img src="../asset/actualite/{{ actualite.img }}" alt="illustration" loading="lazy" class="img-fluid rounded">
+                    </div>
+                    {% endfor %}
+                </aside>
+
+                <!-- Main Content -->
+                <div class="col">
+                    <!-- Fil d'Ariane -->
+                    <nav class="breadcrumb bg-white p-3 shadow-sm">
+                        <!-- Breadcrumb content -->
+                    </nav>
+
+                    <!-- Page Specific Content -->
+                    <div>
+                        {% block content %}
+                        <!-- Contenu des pages filles -->
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-danger text-white py-4">
+            <div class="container d-none d-lg-flex justify-content-between">
+                <!-- logo -->
+                <a href="index.php?controlleur=index&methode=lister" aria-label="logo">
+                    <svg width="195" height="52" viewbox="0 0 195 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- SVG content -->
+                    </svg>
+                </a>
+
+                <!-- adresse -->
+                <ul class="list-unstyled">
+                    <li class="h5">ADRESSE</li>
+                    <li>2 Allée du Parc Montaury,</li>
+                    <li>64600 Anglet</li>
+                </ul>
+
+                <!-- contact -->
+                <ul class="list-unstyled">
+                    <li class="h5">CONTACT</li>
+                    <li>05 59 57 43 03</li>
+                    <li>gurekultura@gmail.com</li>
+                </ul>
+
+                <!-- reseaux sociaux -->
+                <ul class="list-unstyled">
+                    <li class="h5">SUIVEZ-NOUS</li>
+                    <li class="d-flex gap-2">
+                        <a href="#" class="text-white">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" class="text-white">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="text-white">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- proposition -->
+                <div>
+                    <h5>PROPOSEZ-NOUS DES EVENEMENTS</h5>
+                    <a href="index.php?controlleur=propEv&methode=lister" class="btn btn-outline-light">Formulaire</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script defer>
+        // Toggle Burger Menu
+        const burgerMenu = document.getElementById('burger-menu');
+        const menu = document.getElementById('menu');
+        burgerMenu.addEventListener('click', () => {
+            menu.classList.toggle('d-none');
+        });
+    </script>
+
+    {% block script %}
+    <script src="../js/aside.js" defer></script>
+    {% endblock %}
+</body>
+</html>
